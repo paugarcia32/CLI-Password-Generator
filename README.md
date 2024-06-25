@@ -16,16 +16,19 @@ git clone https://github.com/paugarcia32/CLI-Password-Generator.git
 - Uppercase: `-u` or `--uppercase`
 - Numbers: `-n` or `--numbers`
 - Special Characters: `-s` or `--special`
+- Avoid Ambiguous Characters: `-a` or `--ambiguous`
 
 > [!note]
-> There is a input validation, inputs that are not between 5 and 40 characters are not available!
+> There is a input validation, inputs that are not between 12 and 40 characters are not available!
 
 
 ## How to run the appication
 
 ```bash
-cargo r -- -l 12 -w -u -n -s
+cargo r -- -l 30 -w -u -n -s -a
 ```
+
+![imagen](https://github.com/paugarcia32/CLI-Password-Generator/assets/37461446/dad077ee-97ee-444b-a741-4fb418363ccc)
 
 
 ## Acknowledgements
