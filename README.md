@@ -7,11 +7,21 @@ First version
 
 - [x] build a logic to generate a password
 - [x] testing that everything works
-      Seccond version
+
+Seccond version
+
 - [x] Adding the structopt crate
 - [x] Use struct opt in the main.rs
 - [x] Bind and config the arguments expected from the end user
 - [x] Test
+
+Third version
+
+- [x] Adding a lib module
+- [x] Refactor
+- [x] Add the args entity
+- [x] Add the password entity
+- [x] Testing
 
 # How to run the appication
 
