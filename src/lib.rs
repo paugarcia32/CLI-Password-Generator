@@ -1,7 +1,5 @@
-use core::panic;
-use std::error::Error;
-
 use rand::seq::SliceRandom;
+use std::error::Error;
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
@@ -58,7 +56,7 @@ impl Password {
             char_pool.extend('0'..='9');
         }
 
-        if args.is_numbers {
+        if args.is_special_symbols {
             char_pool.extend("!@#$%^&*()_+-=[]{};:',.<>/?".chars());
         }
 
