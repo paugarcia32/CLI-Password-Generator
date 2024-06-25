@@ -1,6 +1,12 @@
 use cli_password_generator::{self, Password};
 
 fn main() {
-    let password_1 = Password::new();
-    println!("The password entity is: {:#?}", password_1);
+    match Password::new() {
+        Ok(password) => {
+            println!("Generated password: {}", password.as_text);
+            println!("Length password: {}", password.length);
+            println!("Password entropy: {:.2} bits", password.entropy);
+        }
+        Err(e) => println!("Error: {}", e),
+    }
 }

@@ -1,3 +1,4 @@
+use rand::rngs::OsRng;
 use rand::seq::SliceRandom;
 use std::error::Error;
 use structopt::StructOpt;
@@ -19,14 +20,17 @@ struct Arguments {
 
     #[structopt(long = "special", short = "s")]
     is_special_symbols: bool,
+
+    #[structopt(long = "ambiguous", short = "a")]
+    is_avoid_ambiguous: bool,
 }
 
 impl Arguments {
     fn get() -> Result<Self, Box<dyn Error>> {
         let args: Arguments = Arguments::from_args_safe()?;
         let length: usize = args.length;
-        if length < 5 || length > 40 {
-            Err("The length must be between 5 and 40 characters")?;
+        if length < 12 || length > 40 {
+            Err("The length must be between 12 and 40 characters")?;
         }
         Ok(Self { length, ..args })
     }
@@ -34,8 +38,9 @@ impl Arguments {
 
 #[derive(Debug)]
 pub struct Password {
-    as_text: String,
-    length: usize,
+    pub as_text: String,
+    pub length: usize,
+    pub entropy: f64,
 }
 
 impl Password {
@@ -57,7 +62,11 @@ impl Password {
         }
 
         if args.is_special_symbols {
-            char_pool.extend("!@#$%^&*()_+-=[]{};:',.<>/?".chars());
+            char_pool.extend("!@#$%^&*()_+-=[]{};:'<>,.?/".chars());
+        }
+
+        if args.is_avoid_ambiguous {
+            char_pool.retain(|&c| !matches!(c, '1' | 'l' | '0' | 'O'));
         }
 
         if char_pool.is_empty() {
@@ -65,12 +74,21 @@ impl Password {
         }
 
         let as_text: String = (0..args.length)
-            .map(|_| *char_pool.choose(&mut rand::thread_rng()).unwrap())
+            .map(|_| *char_pool.choose(&mut OsRng).unwrap())
             .collect();
+
+        let entropy = Password::calculate_entropy(&as_text);
 
         Ok(Self {
             as_text,
             length: args.length,
+            entropy,
         })
+    }
+
+    fn calculate_entropy(password: &str) -> f64 {
+        let length = password.len() as f64;
+        let charset_size: f64 = 94.0;
+        length * charset_size.log2()
     }
 }
