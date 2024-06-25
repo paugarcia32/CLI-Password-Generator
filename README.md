@@ -23,6 +23,12 @@ Third version
 - [x] Add the password entity
 - [x] Testing
 
+Fouth version
+
+- [x] Adding more features
+- [x] Refactor for error handling
+- [x] Testing
+
 # How to run the appication
 
 ## Default Mode
