@@ -2,43 +2,27 @@
 
 The aim of this project is to create a fully random CLI Password Generator.
 
-Goals:
-First version
 
-- [x] build a logic to generate a password
-- [x] testing that everything works
+## Instalation
 
-Seccond version
-
-- [x] Adding the structopt crate
-- [x] Use struct opt in the main.rs
-- [x] Bind and config the arguments expected from the end user
-- [x] Test
-
-Third version
-
-- [x] Adding a lib module
-- [x] Refactor
-- [x] Add the args entity
-- [x] Add the password entity
-- [x] Testing
-
-Fouth version
-
-- [x] Adding more features
-- [x] Refactor for error handling
-- [x] Testing
-
-# How to run the appication
-
-## Default Mode
-
-```rust
-cargo run
+```bash
+git clone https://github.com/paugarcia32/CLI-Password-Generator.git
 ```
 
-## With arguments
+## Available options
 
-```rust
-cargo r -- --length 12
+- Length: `-l` or `--length`
+- Lowercase: `-w` or `--lowercase`
+- Uppercase: `-u` or `--uppercase`
+- Numbers: `-n` or `--numbers`
+- Special Characters: `-s` or `--special`
+
+> [!note]
+> There is a input validation, inputs that are not between 5 and 40 characters are not available!
+
+
+## How to run the appication
+
+```bash
+cargo r -- -l 12 -w -u -n -s
 ```
